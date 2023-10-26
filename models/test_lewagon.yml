@@ -9,3 +9,6 @@ sources:
         description: sales related data
       - name: raw_gz_ship
         description: shipping related data
+        tests:
+          - unique:
+              column_name: orders_id
