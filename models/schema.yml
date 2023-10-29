@@ -17,6 +17,41 @@ version: 2
 #      identifier: raw_gz_ship
 
 
+#sources:
+# - name: raw
+#   schema: gz_raw_data
+#   description: raw data source
+#
+#   tables:
+#   - name: product
+#     identifier: raw_gz_product
+#     description: raw product data
+#     columns:
+#       - name: products_id
+#         description: primary key
+#       - name: purchase_price
+#         description: price of the whole purchased products
+#       
+#   - name: sales
+#     identifier: raw_gz_sales
+#     description: sales raw data
+#     columns:
+#       - name: date_date					
+#       - name: pdt_id	
+#       - name: revenue					
+#       - name: quantity
+#   
+#   - name: ship
+#     identifier: raw_gz_ship
+#     columns:
+#       - name: orders_id
+#       - name: shipping_fee
+#       - name: logcost
+#       - name: ship_cost
+
+
+
+# tests addes
 sources:
  - name: raw
    schema: gz_raw_data
@@ -29,6 +64,9 @@ sources:
      columns:
        - name: products_id
          description: primary key
+         tests: 
+           - unique
+           - not_null
        - name: purchase_price
          description: price of the whole purchased products
        
@@ -45,6 +83,11 @@ sources:
      identifier: raw_gz_ship
      columns:
        - name: orders_id
+         description: primary key
+         tests: 
+           - unique
+           - not_null
+                
        - name: shipping_fee
        - name: logcost
        - name: ship_cost
