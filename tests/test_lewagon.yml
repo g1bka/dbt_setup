@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: gz_raw_data
+    tables:
+      - name: raw_gz_product
+        description: product related data
+      - name: raw_gz_sales
+        description: sales related data
+      - name: raw_gz_ship
+        description: shipping related data
+        tests:
+          - unique:
+              column_name: orders_id
