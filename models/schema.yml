@@ -71,6 +71,9 @@ sources:
          description: price of the whole purchased products
        
    - name: sales
+     freshness: 
+      warn_after: {count: 90, period: day}
+     loaded_at_field: "CASTdate_date as TIMESTAMP)"
      identifier: raw_gz_sales
      description: sales raw data
      columns:
