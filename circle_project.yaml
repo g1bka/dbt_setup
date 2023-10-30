@@ -7,5 +7,5 @@ profile: "default"
 models:
   marts:
     +materialized: table
-    finance:
-        +schema: finance
+    finance_days:
+        +schema: finance_days
