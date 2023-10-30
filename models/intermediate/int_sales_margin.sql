@@ -1,4 +1,7 @@
-WITH int_sales_margin AS 
+with 
+
+
+int_sales_margin AS 
 
 (SELECT 
 
@@ -7,7 +10,7 @@ WITH int_sales_margin AS
     s.orders_id,
     s.revenue, 
     s.quantity, 
-    p.purchase_price,
+    p.purchase_price--,
     --ROUND(s.quantity * p.purchase_price,2) AS purchase_cost --,
     -- s.revenue - ROUND(s.quantity*p.purchase_price,2) AS margin
 
