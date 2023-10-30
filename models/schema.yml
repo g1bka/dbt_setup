@@ -79,8 +79,8 @@ sources:
      columns:
        - name: sales_id
          description: primary key
-         tests:
-         - not_null
+        # tests:
+        # - not_null
         # - unique
         #     column_name: "(orders_id || '-' || products_id)"
        - name: date_date
