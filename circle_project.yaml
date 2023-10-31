@@ -7,3 +7,7 @@ profile: "default"
 models:
   marts:
     materialized: table
+    finance:
+      schema: finance
+
+
