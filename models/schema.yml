@@ -1,0 +1,136 @@
+
+version: 2
+
+#sources:
+#  - name: raw
+#    schema: gz_raw_data
+#
+#    tables:
+#    - name: product
+#      identifier: raw_gz_product
+#      description: 
+#    
+#    - name: sales
+#      identifier: raw_gz_sales
+#    
+#    - name: ship
+#      identifier: raw_gz_ship
+
+
+#sources:
+# - name: raw
+#   schema: gz_raw_data
+#   description: raw data source
+#
+#   tables:
+#   - name: product
+#     identifier: raw_gz_product
+#     description: raw product data
+#     columns:
+#       - name: products_id
+#         description: primary key
+#       - name: purchase_price
+#         description: price of the whole purchased products
+#       
+#   - name: sales
+#     identifier: raw_gz_sales
+#     description: sales raw data
+#     columns:
+#       - name: date_date					
+#       - name: pdt_id	
+#       - name: revenue					
+#       - name: quantity
+#   
+#   - name: ship
+#     identifier: raw_gz_ship
+#     columns:
+#       - name: orders_id
+#       - name: shipping_fee
+#       - name: logcost
+#       - name: ship_cost
+
+
+
+# tests addes
+sources:
+ - name: raw
+   schema: gz_raw_data
+   description: raw data source
+
+   tables:
+   - name: product
+     identifier: raw_gz_product
+     description: raw product data
+     columns:
+       - name: products_id
+         description: primary key
+         tests: 
+           - unique
+           - not_null
+       - name: purchase_price
+         description: price of the whole purchased products
+       
+   - name: sales
+     freshness: 
+      warn_after: {count: 90, period: day}
+     loaded_at_field: "CASTdate_date as TIMESTAMP)"
+     identifier: raw_gz_sales
+     description: sales raw data
+     #tests:
+     # - unique:
+     #   column_name: "(orders_id || '-' || pdt_id)"
+
+     columns:
+       - name: sales_id
+         description: primary key
+       - name: date_date
+       - name: orders_id					
+       - name: products_id	
+       - name: revenue					
+       - name: quantity
+
+   
+   - name: ship
+     identifier: raw_gz_ship
+     columns:
+       - name: orders_id
+         description: primary key
+         tests: 
+           - unique
+           - not_null
+                
+       - name: shipping_fee
+       - name: logcost
+       - name: ship_cost
+
+models:
+- name: int_sales_margin
+  tests:
+    - unique:
+        column_name: "(orders_id || '-' || products_id)"
+    - not_null:
+        column_name:
+          - orders_id
+          - products_id
+          - margin
+          - Purchase_cost
+          - date_date
+          - revenue
+          - quantity
+
+- name: int_orders_margin
+  description: margin calcultation per order 
+  columns:
+    - name: order_id
+      description: primary key
+    - name: margin
+      description: Margin = Revenue - Purchase_cost
+    - name: Purchase_cost
+      description: Purchase_cost = Quantity * Purchase_price 
+    - name: date_date
+      description: date of the order
+    - name: revenue
+      description: sum of revenue per order 
+    - name: quantity
+      description: sum of quantity per order
+
