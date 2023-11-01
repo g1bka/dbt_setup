@@ -2,14 +2,14 @@ name: "gz-dbt-repository"
 version: "1.0.0"
 config-version: 2
 
-profile: "default"
+#profile: "default"
 
 models:
   gz-dbt-repository:
     marts:
       materialized: table
-      finance:
-        schema: finance
+#      finance:
+#        schema: finance
 
 #packages:
  # - package: dbt-labs/dbt_utils
