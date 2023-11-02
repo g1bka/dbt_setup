@@ -3,7 +3,8 @@ with
 
 int_sales_margin AS 
 
-(SELECT 
+(
+    SELECT 
 
     p.products_id, 
     s.date_date, 
@@ -17,6 +18,10 @@ int_sales_margin AS
 FROM {{ ref('stg_raw__sales') }} as s
 LEFT JOIN  {{ ref('stg_raw__product') }} as p
 
-ON p.products_id=s.products_id)
+USING (products_id)
+
+)
 
 SELECT * FROM int_sales_margin
+
+
