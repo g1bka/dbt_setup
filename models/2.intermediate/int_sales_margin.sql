@@ -13,14 +13,15 @@ int_sales_margin AS
     s.quantity, 
     p.purchase_price,
     ROUND(s.quantity * p.purchase_price,2) AS purchase_cost,
-    s.revenue - ROUND(s.quantity*p.purchase_price,2) AS margin,
-    {{ margin_percentage('revenue', 'purchase_cost' ) }} as margin_2
+    s.revenue - ROUND(s.quantity*p.purchase_price,2) AS margin
 
 FROM {{ ref('stg_raw__sales') }} as s
 LEFT JOIN  {{ ref('stg_raw__product') }} as p
 
-ON p.products_id=s.products_id
+USING (products_id)
 
 )
 
 SELECT * FROM int_sales_margin
+
+
